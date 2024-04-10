@@ -7,9 +7,7 @@ router.get("/check", (req, res) => {
     res.status(200).json({ message: "API is up!" })
 })
 
-router.get("/pay", (req, res) => {
-    res.status(200).json({ message: "Payment successful!" })
-})
+router.patch("/pay/:id", paymentController.pay)
 
 router.post("/create", paymentController.createPayments)
 

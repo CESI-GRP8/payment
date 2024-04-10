@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 const { Schema } = mongoose;
 
-const exampleModel = new Schema({
-    example: {
+const paymentModel = new Schema({
+    commandNumber: {
         required: [true, "Type is a required field"],
-        type: String,
+        type: Number,
     },
+    status: {
+        retquired: [true, "Status is a required field"],
+        type: String,
+    }
 })
 
-module.exports = mongoose.model("Example", exampleModel)
+module.exports = mongoose.model("Payment", paymentModel)

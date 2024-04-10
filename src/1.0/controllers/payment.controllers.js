@@ -1,7 +1,25 @@
+const Payment = require('../models/payment.models')
+
+exports.pay = async (req, res) => {
+    try {
+        const payedPayment = await Payment.findOneAndUpdate({ _id: req.params.id }, { "status": "Payment successfull!" })
+        if (payedPayment != null) {
+            return res.status(200).json({ message: `Payment ${req.params.id} worked successfully!` })
+        }
+        return res.status(404).json({ message: `Payment ${req.params.id} doesn't worked successfully!` })
+
+    }
+    catch (error) {
+        console.log(error)
+        return res.status(400).json({ message: error.message })
+    }
+}
+
 exports.createPayments = async (req, res) => {
     try {
         var newPayment = new Payment({
-            example: req.body.example,
+            commandNumber: req.body.commandNumber,
+            status: req.body.status,
         })
         await newPayment.save()
         return res.status(200).json(newPayment)
